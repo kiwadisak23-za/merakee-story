@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MERAKEE LOG MAKER</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <h1>MERAKEE LOG </h1>
+    <p>Merakee Family</p>
+  </div>
+  <button id="savePngBtn" class="gold-btn">บันทึกรูปนี้ PNG</button>
+</header>
+
+<main class="app">
+
+  <aside class="tools">
+    <h2>เครื่องมือ</h2>
+
+    <h3>รูปแบบ</h3>
+
+    <label>ขนาดฟอนต์</label>
+    <input type="number" id="fontSize" value="42">
+
+    <label>ระยะห่างบรรทัด</label>
+    <input type="number" id="lineHeight" value="1.35" step="0.05">
+
+    <label>ความกว้างสูงสุดข้อความ</label>
+    <input type="range" id="maxWidth" min="20" max="100" value="95">
+
+    <label>ตำแหน่งข้อความ X</label>
+    <input type="range" id="textPosX" min="0" max="100" value="3">
+
+    <label>ตำแหน่งข้อความ Y</label>
+    <input type="range" id="textPosY" min="0" max="100" value="70">
+
+    <div class="check-row">
+      <label><input type="checkbox" id="darkBg" checked> พื้นหลังดำ</label>
+      <label><input type="checkbox" id="textStroke" checked> ขอบตัวหนังสือ</label>
+    </div>
+
+    <h3>สีข้อความ</h3>
+
+    <label>สีข้อความปกติ</label>
+    <input type="color" id="normalColor" value="#ffffff">
+
+    <label>สี ME เริ่มด้วย *</label>
+    <input type="color" id="meColor" value="#c58cff">
+
+    <label>สี DO เริ่มด้วย **</label>
+    <input type="color" id="doColor" value="#ffd400">
+
+    <h3>รูปพื้นหลัง</h3>
+
+    <label class="upload-box">
+      📁 เปลี่ยนพื้นหลัง
+      <input type="file" id="bgInput" accept="image/*">
+    </label>
+
+    <div class="size-grid">
+      <div>
+        <label>W</label>
+        <input type="number" id="canvasW" value="1600">
+      </div>
+      <div>
+        <label>H</label>
+        <input type="number" id="canvasH" value="900">
+      </div>
+    </div>
+
+    <h3>โลโก้</h3>
+
+    <label class="upload-box">
+      🖼️ เพิ่มโลโก้
+      <input type="file" id="logoInput" accept="image/*">
+    </label>
+
+    <label>ขนาดโลโก้</label>
+    <input type="range" id="logoSize" min="40" max="300" value="120">
+
+    <label>ตำแหน่งโลโก้ X</label>
+    <input type="range" id="logoPosX" min="0" max="100" value="2">
+
+    <label>ตำแหน่งโลโก้ Y</label>
+    <input type="range" id="logoPosY" min="0" max="100" value="2">
+
+    <h3>พื้นหลัง</h3>
+
+    <label>ความมืดพื้นหลัง</label>
+    <input type="range" id="overlayOpacity" min="0" max="90" value="35">
+
+    <label>เบลอพื้นหลัง</label>
+    <input type="range" id="blurAmount" min="0" max="10" value="0">
+
+    <label>ความสว่าง</label>
+    <input type="range" id="brightness" min="40" max="140" value="100">
+
+    <label>ความคมชัด</label>
+    <input type="range" id="contrast" min="50" max="180" value="100">
+
+    <h3>Log Story</h3>
+
+    <textarea id="logInput" rows="12">Valentino Vicente พูดว่า : เอาหล่ะ หลังจากนี้เราต้องหางานหาเงินกันใหม่
+*Galindo Franco ยกมือช้าๆก่อนจะพูดแทรก
+Galindo Franco พูดว่า : ฉันขอพูดหน่อยแล้วกัน
+**ทุกคนต่างพยักหน้าและเดินแยกย้ายออกไปเพื่อจัดการงานของตัวเอง</textarea>
+
+    <button id="savePngBtn2" class="gold-btn full">บันทึกรูปนี้ PNG</button>
+  </aside>
+
+  <section class="preview">
+    <div id="canvasArea" class="canvas-area">
+      <img id="bgImage" class="bg-image" alt="">
+      <div id="overlay"></div>
+
+      <img id="logoImage" class="logo-image" alt="">
+
+      <div id="textLayer" class="text-layer">
+        <div id="logPreview"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
