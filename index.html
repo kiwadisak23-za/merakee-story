@@ -24,23 +24,24 @@
     <h3>รูปแบบ</h3>
 
     <label>ขนาดฟอนต์</label>
-    <input type="number" id="fontSize" value="42">
+    <input type="number" id="fontSize" value="34" min="10" max="100">
 
     <label>ระยะห่างบรรทัด</label>
-    <input type="number" id="lineHeight" value="1.35" step="0.05">
+    <input type="number" id="lineHeight" value="1.25" min="1" max="3" step="0.05">
 
-    <label>ความกว้างสูงสุดข้อความ</label>
-    <input type="range" id="maxWidth" min="20" max="100" value="95">
+    <label>ความกว้างข้อความ</label>
+    <input type="range" id="maxWidth" min="20" max="100" value="94">
 
     <label>ตำแหน่งข้อความ X</label>
     <input type="range" id="textPosX" min="0" max="100" value="3">
 
     <label>ตำแหน่งข้อความ Y</label>
-    <input type="range" id="textPosY" min="0" max="100" value="70">
+    <input type="range" id="textPosY" min="0" max="100" value="10">
 
     <div class="check-row">
       <label><input type="checkbox" id="darkBg" checked> พื้นหลังดำ</label>
       <label><input type="checkbox" id="textStroke" checked> ขอบตัวหนังสือ</label>
+      <label><input type="checkbox" id="autoFit" checked> ย่ออัตโนมัติ</label>
     </div>
 
     <h3>สีข้อความ</h3>
@@ -64,13 +65,15 @@
     <div class="size-grid">
       <div>
         <label>W</label>
-        <input type="number" id="canvasW" value="1600">
+        <input type="number" id="canvasW" value="1200">
       </div>
       <div>
         <label>H</label>
-        <input type="number" id="canvasH" value="900">
+        <input type="number" id="canvasH" value="675">
       </div>
     </div>
+
+    <button id="fitBtn" class="dark-btn">พอดีหน้าจอ</button>
 
     <h3>โลโก้</h3>
 
@@ -104,23 +107,26 @@
 
     <h3>Log Story</h3>
 
-    <textarea id="logInput" rows="12">Valentino Vicente พูดว่า : เอาหล่ะ หลังจากนี้เราต้องหางานหาเงินกันใหม่
-*Galindo Franco ยกมือช้าๆก่อนจะพูดแทรก
-Galindo Franco พูดว่า : ฉันขอพูดหน่อยแล้วกัน
-**ทุกคนต่างพยักหน้าและเดินแยกย้ายออกไปเพื่อจัดการงานของตัวเอง</textarea>
+    <textarea
+id="logInput"
+rows="12"
+placeholder="ข้อความ LOG..."
+></textarea>
 
     <button id="savePngBtn2" class="gold-btn full">บันทึกรูปนี้ PNG</button>
   </aside>
 
   <section class="preview">
-    <div id="canvasArea" class="canvas-area">
-      <img id="bgImage" class="bg-image" alt="">
-      <div id="overlay"></div>
+    <div id="canvasWrap" class="canvas-wrap">
+      <div id="canvasArea" class="canvas-area">
+        <img id="bgImage" class="bg-image" alt="">
+        <div id="overlay"></div>
 
-      <img id="logoImage" class="logo-image" alt="">
+        <img id="logoImage" class="logo-image" alt="">
 
-      <div id="textLayer" class="text-layer">
-        <div id="logPreview"></div>
+        <div id="textLayer" class="text-layer">
+          <div id="logPreview"></div>
+        </div>
       </div>
     </div>
   </section>

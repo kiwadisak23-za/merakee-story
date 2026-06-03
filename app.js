@@ -10,6 +10,7 @@ const textPosY = document.getElementById("textPosY");
 
 const darkBg = document.getElementById("darkBg");
 const textStroke = document.getElementById("textStroke");
+const autoFit = document.getElementById("autoFit");
 
 const normalColor = document.getElementById("normalColor");
 const meColor = document.getElementById("meColor");
@@ -28,6 +29,7 @@ const logPreview = document.getElementById("logPreview");
 const bgImage = document.getElementById("bgImage");
 const logoImage = document.getElementById("logoImage");
 const canvasArea = document.getElementById("canvasArea");
+const canvasWrap = document.getElementById("canvasWrap");
 const textLayer = document.getElementById("textLayer");
 const overlay = document.getElementById("overlay");
 
@@ -36,6 +38,7 @@ const blurAmount = document.getElementById("blurAmount");
 const brightness = document.getElementById("brightness");
 const contrast = document.getElementById("contrast");
 
+const fitBtn = document.getElementById("fitBtn");
 const savePngBtn = document.getElementById("savePngBtn");
 const savePngBtn2 = document.getElementById("savePngBtn2");
 
@@ -94,6 +97,39 @@ function formatLog(text) {
     .join("");
 }
 
+function fitCanvasToScreen() {
+  const wrapW = canvasWrap.clientWidth;
+  const wrapH = canvasWrap.clientHeight;
+
+  const realW = Number(canvasW.value);
+  const realH = Number(canvasH.value);
+
+  const scaleX = wrapW / realW;
+  const scaleY = wrapH / realH;
+
+  const scale = Math.min(scaleX, scaleY, 1);
+
+  canvasArea.style.transform = `scale(${scale})`;
+}
+
+function fitTextInsideCanvas() {
+  if (!autoFit.checked) return;
+
+  let size = Number(fontSize.value);
+  const minSize = 14;
+
+  logPreview.style.fontSize = size + "px";
+
+  const canvasHeight = Number(canvasH.value);
+  const textTop = (Number(textPosY.value) / 100) * canvasHeight;
+  const maxTextHeight = canvasHeight - textTop - 20;
+
+  while (logPreview.scrollHeight > maxTextHeight && size > minSize) {
+    size -= 1;
+    logPreview.style.fontSize = size + "px";
+  }
+}
+
 function updateAll() {
   canvasArea.style.width = canvasW.value + "px";
   canvasArea.style.height = canvasH.value + "px";
@@ -133,6 +169,11 @@ function updateAll() {
     "blur(" + blurAmount.value + "px) " +
     "brightness(" + brightness.value + "%) " +
     "contrast(" + contrast.value + "%)";
+
+  setTimeout(function () {
+    fitTextInsideCanvas();
+    fitCanvasToScreen();
+  }, 0);
 }
 
 [
@@ -143,6 +184,7 @@ function updateAll() {
   textPosY,
   darkBg,
   textStroke,
+  autoFit,
   normalColor,
   meColor,
   doColor,
@@ -161,12 +203,21 @@ function updateAll() {
   el.addEventListener("change", updateAll);
 });
 
+fitBtn.addEventListener("click", fitCanvasToScreen);
+
+window.addEventListener("resize", fitCanvasToScreen);
+
 async function savePNG() {
+  const oldTransform = canvasArea.style.transform;
+  canvasArea.style.transform = "scale(1)";
+
   const canvas = await html2canvas(canvasArea, {
     backgroundColor: null,
     scale: 2,
     useCORS: true
   });
+
+  canvasArea.style.transform = oldTransform;
 
   const link = document.createElement("a");
   link.download = "merakee-log-story.png";

@@ -7,6 +7,7 @@ body {
   background: #090909;
   color: #fff;
   font-family: Arial, Tahoma, sans-serif;
+  overflow: hidden;
 }
 
 .topbar {
@@ -32,13 +33,13 @@ body {
 
 .app {
   display: grid;
-  grid-template-columns: 450px 1fr;
+  grid-template-columns: 430px 1fr;
   height: calc(100vh - 80px);
 }
 
 .tools {
   background: #0f0f0f;
-  padding: 28px 34px;
+  padding: 24px 30px;
   border-right: 1px solid #242424;
   overflow-y: auto;
 }
@@ -77,7 +78,8 @@ input[type="color"] {
 
 .check-row {
   display: flex;
-  gap: 18px;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-top: 14px;
 }
 
@@ -120,27 +122,49 @@ input[type="color"] {
   cursor: pointer;
 }
 
+.dark-btn {
+  background: #242424;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
 .full {
   width: 100%;
   margin-top: 25px;
 }
 
 .preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-  padding: 30px;
+  height: calc(100vh - 80px);
   background: #070707;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.canvas-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .canvas-area {
   position: relative;
-  width: 1600px;
-  height: 900px;
-  background: #222;
+  width: 1200px;
+  height: 675px;
+  background: #181818;
   overflow: hidden;
-  box-shadow: 0 0 40px #000;
+  box-shadow: 0 0 35px #000;
+  flex-shrink: 0;
+  transform-origin: center center;
 }
 
 .bg-image {
@@ -172,15 +196,19 @@ input[type="color"] {
 
 .text-layer {
   position: absolute;
-  width: 95%;
+  width: 94%;
   z-index: 4;
+  max-height: 96%;
+  overflow: hidden;
 }
 
 #logPreview {
-  font-size: 42px;
-  line-height: 1.35;
+  font-size: 34px;
+  line-height: 1.25;
   font-weight: 900;
   white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .stroke {
@@ -211,12 +239,26 @@ input[type="color"] {
 }
 
 @media (max-width: 1000px) {
+  body {
+    overflow: auto;
+  }
+
   .app {
     grid-template-columns: 1fr;
     height: auto;
   }
 
   .tools {
-    height: 60vh;
+    height: 55vh;
   }
+
+  .preview {
+    height: 45vh;
+  }
+}
+
+#logInput::placeholder {
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 16px;
+  font-style: italic;
 }
