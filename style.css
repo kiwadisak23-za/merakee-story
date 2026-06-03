@@ -71,6 +71,11 @@ textarea {
   line-height: 1.5;
 }
 
+#logInput::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+  font-style: italic;
+}
+
 input[type="color"] {
   height: 45px;
   padding: 4px;
@@ -136,6 +141,7 @@ input[type="color"] {
 .full {
   width: 100%;
   margin-top: 25px;
+  margin-bottom: 30px;
 }
 
 .preview {
@@ -255,10 +261,4 @@ input[type="color"] {
   .preview {
     height: 45vh;
   }
-}
-
-#logInput::placeholder {
-  color: rgba(255, 255, 255, 0.18);
-  font-size: 16px;
-  font-style: italic;
 }

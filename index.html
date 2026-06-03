@@ -10,111 +10,115 @@
 
 <header class="topbar">
   <div>
-    <h1>MERAKEE LOG </h1>
-    <p>Merakee Family</p>
+    <h1>MERAKEE LOG MAKER</h1>
+    <p>FiveM / GTA V Story Screenshot Generator</p>
   </div>
   <button id="savePngBtn" class="gold-btn">บันทึกรูปนี้ PNG</button>
 </header>
 
 <main class="app">
+<aside class="tools">
+  <h2>เครื่องมือ</h2>
 
-  <aside class="tools">
-    <h2>เครื่องมือ</h2>
+   <h3>Log Story</h3>
 
-    <h3>รูปแบบ</h3>
+  <textarea
+    id="logInput"
+    rows="12"
+    placeholder="ข้อความ LOG..."
+  ></textarea>
 
-    <label>ขนาดฟอนต์</label>
-    <input type="number" id="fontSize" value="34" min="10" max="100">
 
-    <label>ระยะห่างบรรทัด</label>
-    <input type="number" id="lineHeight" value="1.25" min="1" max="3" step="0.05">
+  <label>ขนาดฟอนต์</label>
+  <input type="number" id="fontSize" value="34" min="10" max="100">
 
-    <label>ความกว้างข้อความ</label>
-    <input type="range" id="maxWidth" min="20" max="100" value="94">
+  <label>ระยะห่างบรรทัด</label>
+  <input type="number" id="lineHeight" value="1.25" min="1" max="3" step="0.05">
 
-    <label>ตำแหน่งข้อความ X</label>
-    <input type="range" id="textPosX" min="0" max="100" value="3">
+  <label>ความกว้างข้อความ</label>
+  <input type="range" id="maxWidth" min="20" max="100" value="94">
 
-    <label>ตำแหน่งข้อความ Y</label>
-    <input type="range" id="textPosY" min="0" max="100" value="10">
+  <label>ตำแหน่งข้อความ X</label>
+  <input type="range" id="textPosX" min="0" max="100" value="3">
 
-    <div class="check-row">
-      <label><input type="checkbox" id="darkBg" checked> พื้นหลังดำ</label>
-      <label><input type="checkbox" id="textStroke" checked> ขอบตัวหนังสือ</label>
-      <label><input type="checkbox" id="autoFit" checked> ย่ออัตโนมัติ</label>
+  <label>ตำแหน่งข้อความ Y</label>
+  <input type="range" id="textPosY" min="0" max="100" value="10">
+
+  <div class="check-row">
+    <label><input type="checkbox" id="darkBg" checked> พื้นหลังดำ</label>
+    <label><input type="checkbox" id="textStroke" checked> ขอบตัวหนังสือ</label>
+    <label><input type="checkbox" id="autoFit" checked> ย่ออัตโนมัติ</label>
+  </div>
+
+
+
+  <h3>สีข้อความ</h3>
+
+  <label>สีข้อความปกติ</label>
+  <input type="color" id="normalColor" value="#ffffff">
+
+  <label>สี ME เริ่มด้วย *</label>
+  <input type="color" id="meColor" value="#c58cff">
+
+  <label>สี DO เริ่มด้วย **</label>
+  <input type="color" id="doColor" value="#ffd400">
+
+  <h3>รูปพื้นหลัง</h3>
+
+  <label class="upload-box">
+    📁 เปลี่ยนพื้นหลัง
+    <input type="file" id="bgInput" accept="image/*">
+  </label>
+
+  <div class="size-grid">
+    <div>
+      <label>W</label>
+      <input type="number" id="canvasW" value="1200">
     </div>
 
-    <h3>สีข้อความ</h3>
-
-    <label>สีข้อความปกติ</label>
-    <input type="color" id="normalColor" value="#ffffff">
-
-    <label>สี ME เริ่มด้วย *</label>
-    <input type="color" id="meColor" value="#c58cff">
-
-    <label>สี DO เริ่มด้วย **</label>
-    <input type="color" id="doColor" value="#ffd400">
-
-    <h3>รูปพื้นหลัง</h3>
-
-    <label class="upload-box">
-      📁 เปลี่ยนพื้นหลัง
-      <input type="file" id="bgInput" accept="image/*">
-    </label>
-
-    <div class="size-grid">
-      <div>
-        <label>W</label>
-        <input type="number" id="canvasW" value="1200">
-      </div>
-      <div>
-        <label>H</label>
-        <input type="number" id="canvasH" value="675">
-      </div>
+    <div>
+      <label>H</label>
+      <input type="number" id="canvasH" value="675">
     </div>
+  </div>
 
-    <button id="fitBtn" class="dark-btn">พอดีหน้าจอ</button>
+  <button id="fitBtn" class="dark-btn">พอดีหน้าจอ</button>
 
-    <h3>โลโก้</h3>
+  <h3>แต่งรูปพื้นหลัง</h3>
 
-    <label class="upload-box">
-      🖼️ เพิ่มโลโก้
-      <input type="file" id="logoInput" accept="image/*">
-    </label>
+  <label>ความมืดพื้นหลัง</label>
+  <input type="range" id="overlayOpacity" min="0" max="90" value="35">
 
-    <label>ขนาดโลโก้</label>
-    <input type="range" id="logoSize" min="40" max="300" value="120">
+  <label>เบลอพื้นหลัง</label>
+  <input type="range" id="blurAmount" min="0" max="10" value="0">
 
-    <label>ตำแหน่งโลโก้ X</label>
-    <input type="range" id="logoPosX" min="0" max="100" value="2">
+  <label>ความสว่าง</label>
+  <input type="range" id="brightness" min="40" max="140" value="100">
 
-    <label>ตำแหน่งโลโก้ Y</label>
-    <input type="range" id="logoPosY" min="0" max="100" value="2">
+  <label>ความคมชัด</label>
+  <input type="range" id="contrast" min="50" max="180" value="100">
 
-    <h3>พื้นหลัง</h3>
+  <h3>โลโก้</h3>
 
-    <label>ความมืดพื้นหลัง</label>
-    <input type="range" id="overlayOpacity" min="0" max="90" value="35">
+  <label class="upload-box">
+    🖼️ เพิ่มโลโก้
+    <input type="file" id="logoInput" accept="image/*">
+  </label>
 
-    <label>เบลอพื้นหลัง</label>
-    <input type="range" id="blurAmount" min="0" max="10" value="0">
+  <label>ขนาดโลโก้</label>
+  <input type="range" id="logoSize" min="40" max="300" value="120">
 
-    <label>ความสว่าง</label>
-    <input type="range" id="brightness" min="40" max="140" value="100">
+  <label>ตำแหน่งโลโก้ X</label>
+  <input type="range" id="logoPosX" min="0" max="100" value="2">
 
-    <label>ความคมชัด</label>
-    <input type="range" id="contrast" min="50" max="180" value="100">
+  <label>ตำแหน่งโลโก้ Y</label>
+  <input type="range" id="logoPosY" min="0" max="100" value="2">
 
-    <h3>Log Story</h3>
+  <button id="savePngBtn2" class="gold-btn full">
+    บันทึกรูปนี้ PNG
+  </button>
 
-    <textarea
-id="logInput"
-rows="12"
-placeholder="ข้อความ LOG..."
-></textarea>
-
-    <button id="savePngBtn2" class="gold-btn full">บันทึกรูปนี้ PNG</button>
-  </aside>
+</aside>
 
   <section class="preview">
     <div id="canvasWrap" class="canvas-wrap">
